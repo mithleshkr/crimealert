@@ -5,13 +5,13 @@ import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOut
 
 function Signup()  {
 
-    const paperstyle={padding:'30px 20px', width:300, margin:'20px auto'}
+    const paperstyle={padding:20, width:300, margin:'0 auto'}
     const headerstyle={margin:0}
     const avatarstyle={backgroundColor:'blue'}
     return (
         
         <Grid>
-            <Paper elevation={20} style={paperstyle}>
+            <Paper  style={paperstyle}>
                 <Grid align="center">
                     <Avatar style={avatarstyle}>
                         <AddCircleOutlineOutlinedIcon />
@@ -27,7 +27,9 @@ function Signup()  {
                     <TextField fullWidth label="Age" placeholder="Enter your age" type="number" required/>
                     <TextField fullWidth label="Phone" placeholder="Enter your phone number" type="number" required/>
                     <TextField fullWidth label="City" placeholder="Enter your city" type="text" required/>
-                    <TextField fullWidth label="Country" placeholder="Enter your Country" type="text" required /> <br/>
+                    <TextField fullWidth label="Country" placeholder="Enter your Country" type="text" required /> 
+                    
+                    <br/>
                     <Button type="submit" variant="contained" color="primary" >
                         Sign Up
                     </Button>
