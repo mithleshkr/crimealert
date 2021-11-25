@@ -70,15 +70,24 @@ function Posts() {
 
             
             <div style={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
-                <card className="card" style={{display:"flex",justifyContent:"space-evenly",flexDirection:"column",overflowY:"auto"}} >
+                <card className="card" style={{display:"flex",justifyContent:"space-evenly",flexDirection:"column",height:"23vh"}} >
+                    <div >
                     <div className="container" style={{display:"flex",justifyContent:"space-evenly",flexDirection:"row"}}>
                 <p>{post.crimedate}</p>
                 <p>{post.crimetime}</p>
                 <p>{post.location}</p>
                 </div>
-                <div style={{display:"flex",justifyContent:"space-evenly",flexDirection:"column"}}>
+                <div>
+                    hii
+                </div>
+                <div style={{display:"flex",flexDirection:"row",overflowX:"auto"}}>
                     
                     {post.about}
+                </div>
+                </div>
+                <div>
+                <Button variant="contained" >edit</Button>
+                <Button variant="contained">Delete</Button>
                 </div>
                 </card>
                     
