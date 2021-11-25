@@ -69,8 +69,19 @@ function Posts() {
                 return(
 
             
-            <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-                <p>{post.about}</p>
+            <div style={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
+                <card className="card" style={{display:"flex",justifyContent:"space-evenly",flexDirection:"column",overflowY:"auto"}} >
+                    <div className="container" style={{display:"flex",justifyContent:"space-evenly",flexDirection:"row"}}>
+                <p>{post.crimedate}</p>
+                <p>{post.crimetime}</p>
+                <p>{post.location}</p>
+                </div>
+                <div style={{display:"flex",justifyContent:"space-evenly",flexDirection:"column"}}>
+                    
+                    {post.about}
+                </div>
+                </card>
+                    
             </div>
                 )
             })}
