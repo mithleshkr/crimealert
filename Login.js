@@ -3,13 +3,17 @@ import { Grid,Paper, Avatar, TextField, Button, Typography,Link } from '@materia
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import {useNavigate} from 'react-router-dom';
+
 const Login=({handleChange})=>{
+    const navigate = useNavigate();
+
 
     const paperStyle={padding :20,height:'73vh',width:300, margin:"0 auto"}
-    const avatarStyle={backgroundColor:'#1bbd7e'}
+    const avatarStyle={backgroundColor:'blue'}
     const btnstyle={margin:'8px 0'}
     return(
-        <Grid>
+        <Grid >
             <Paper  style={paperStyle}>
                 <Grid align='center'>
                      <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
@@ -26,15 +30,13 @@ const Login=({handleChange})=>{
                     }
                     label="Remember me"
                  />
-                <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
+                <Button  onClick={() => navigate('/dashboard')} type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
                 <Typography >
-                     <Link href="#" >
-                        Forgot password ?
-                </Link>
+                    
                 </Typography>
-                <Typography > Do you have an account ?
+                <Typography > New User ?
                      <Link href="#" onClick={()=>handleChange("event",1)} >
-                        Sign Up 
+                        Click here to signup
                 </Link>
                 </Typography>
             </Paper>
