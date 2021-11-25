@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import { Tabs, Tab, Button, Dialog, DialogTitle, DialogContent } from '@material-ui/core'
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 
@@ -9,7 +9,17 @@ import Postform from './Postform';
 function Posts() {
 
    
+    const [display, setDisplay] = useState([]);
 
+    const showDetails = async() => {
+        const res= await fetch("http://localhost:3333/post")
+        .then((res)=>res.json())
+        .then((data)=>setDisplay(data))
+        console.warn("res", res);
+    }
+    useEffect(()=>{
+        showDetails();
+    },[])
     
 
     const [open, setOpen] = React.useState(false);
@@ -55,7 +65,16 @@ function Posts() {
                    
             
             </div>
+            {display.map(post =>{
+                return(
+
             
+            <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+                <p>{post.about}</p>
+            </div>
+                )
+            })}
+        
         </div>
         
     </div>
