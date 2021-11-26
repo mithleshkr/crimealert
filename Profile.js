@@ -63,20 +63,51 @@ function Profile() {
             <p>Your total post</p>   
          </div> 
          </div>
-         <div>
+         <br/>
+         <br/>
+         <div style={{display:"flex",justifyContent:"space-evenly"}}>
                  Your Details
              </div> 
-         <div style={{display:"flex",justifyContent:"space-evenly",backgroundColor:"whitesmoke",height:"30vh"}}>
+         <div style={{display:"flex",justifyContent:"space-evenly",height:"30vh"}}>
              
              {display.map(post=>{
                  return(
-                     <div style={{display:"flex",justifyContent:"space-around"}}>
+                     <div style={{display:"flex",backgroundColor:"whitesmoke",width:"50%",justifyContent:"center"}}>
+                         <div style={{display:"flex",flex:1,flexDirection:"column"}}>
+                             <div style={{display:"flex",flex:1}}>
+                             <span style={{marginRight:"5px"}}>Name:- </span> 
                          {post.uname}
-                         {post.uage}
-                         {post.uemail}
-                         {post.ucity}
-                         {post.ucountry}
+                         </div>
+
+                         <div style={{display:"flex",flex:1}}>
+                         <span style={{marginRight:"5px"}}>Age:- </span> 
+                        {post.uage}
+                        </div>
+
+                        <div style={{display:"flex",flex:1}}>
+                        <span style={{marginRight:"5px"}}>Email:- </span> 
+                        {post.uemail}
+                        </div>
+                         </div>
+
+                         <div style={{display:"flex",flex:1,flexDirection:"column"}}>
+                             <div style={{display:"flex",flex:1}}>
+                             <span style={{marginRight:"5px"}}>Phone:- </span>   
                          {post.uphone}
+                         </div>
+
+                         <div style={{display:"flex",flex:1}}>
+                         <span style={{marginRight:"5px"}}>City:- </span> 
+                        {post.ucity}
+                        </div>
+
+                        <div style={{display:"flex",flex:1}}>
+                        <span style={{marginRight:"5px"}}>Country:- </span> 
+                        {post.ucountry}
+                        </div>
+                         </div>
+
+                         
                      </div>
                  )
              })}
