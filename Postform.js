@@ -11,8 +11,8 @@ function Postform() {
     function save(e) {
         e.preventDefault();
         const formData = new FormData();
-        formData.append(cimage);
-        console.warn({ about, crimedate, crimetime, location, cimage});
+        formData.append('image',cimage);
+        console.log({ about, crimedate, crimetime, location, cimage});
         let data={ about, crimedate, crimetime, location,cimage}
         fetch("http://localhost:3333/post",{
             method:'POST',
@@ -23,13 +23,14 @@ function Postform() {
             body:JSON.stringify(data)
          }).then((result)=>{
              console.warn("result",result);
-            
+             
     
          })
       }
 
       const handleImage = (e)=>{
-          setCimage(URL.createObjectURL(e.target.files[0]));
+          setCimage((URL.createObjectURL(e.target.files[0])));
+          console.log(e.target.files[0])
       }
     //   function imgPick(e)
     //   {
@@ -57,7 +58,7 @@ function Postform() {
                 <input   onChange={handleImage} type="file"  />
                 
                 <br/>
-                <Button variant="contained" size="small" color="primary" onClick={save}>Add</Button>
+                <Button type="submit" variant="contained" size="small" color="primary" onClick={save }>Add</Button>
             </form>
             
         </div>
