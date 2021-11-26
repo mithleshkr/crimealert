@@ -62,7 +62,25 @@ function Profile() {
           <div style={{display:"flex"}}>
             <p>Your total post</p>   
          </div> 
-         </div> 
+         </div>
+         <div>
+                 Your Details
+             </div> 
+         <div style={{display:"flex",justifyContent:"space-evenly",backgroundColor:"whitesmoke",height:"30vh"}}>
+             
+             {display.map(post=>{
+                 return(
+                     <div style={{display:"flex",justifyContent:"space-around"}}>
+                         {post.uname}
+                         {post.uage}
+                         {post.uemail}
+                         {post.ucity}
+                         {post.ucountry}
+                         {post.uphone}
+                     </div>
+                 )
+             })}
+         </div>
         </div>
         
     </div>
