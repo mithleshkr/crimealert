@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react'
 import { Tabs, Tab, Button, DialogTitle, Dialog, DialogContent, TextField } from '@material-ui/core'
 import './Dashboard.css'
 import {useNavigate} from 'react-router-dom';
+import  EditIcon  from '@material-ui/icons/Edit';
 
 
 function Profile() {
@@ -169,7 +170,7 @@ function Profile() {
                          </div>
                          
                             <div style={{display:"flex",flexDirection:"column",alignItems:"flex-end",marginTop:180}}>
-                         <Button variant="contained" color="primary" onClick={()=>editUser(post.id)}>Edit</Button>
+                         <Button variant="contained" color="primary" onClick={()=>editUser(post.id)}>{<EditIcon />}</Button>
                          <Dialog open={open} onClose={editUserClose}>
                              <DialogTitle>User Details</DialogTitle>
                              <DialogContent>
