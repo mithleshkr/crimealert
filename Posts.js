@@ -2,6 +2,8 @@ import React,{useState, useEffect} from 'react'
 import { Tabs, Tab, Button, Dialog, DialogTitle, DialogContent, TextField } from '@material-ui/core'
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 // import logo from '../logo.svg';
+import  EditIcon  from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import './Dashboard.css'
 
@@ -88,8 +90,10 @@ function Posts() {
        
       };
 
-      function updatePost (){
-      
+      function updatePost (e){
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('image',cimage);
         let item={about,crimedate, crimetime, location,cimage, userid}
         fetch(`http://localhost:3333/post/${userid}`,{
             method: 'PUT',
@@ -106,9 +110,10 @@ function Posts() {
             })
         })
     }
-//   const handleImage =(e)=>{
-//        setCimage({image: e.target.files[0]});
-//    }
+    const handleImage = (e)=>{
+        setCimage((URL.createObjectURL(e.target.files[0])));
+        console.log(e.target.files[0])
+    }
 
     return (
         <div style={{display:"flex",flex:1,height:"100vh"}} >
@@ -167,8 +172,8 @@ function Posts() {
                     {post.about}
                 </div>
                 </div>
-                <div style={{display:"flex",justifyContent:"space-around"}}>
-                <Button size="small" variant="contained" onClick={()=>editPost(post.id)} >edit</Button>
+                <div style={{display:"flex",justifyContent:"space-around",position:"relative"}}>
+                <Button size="small" variant="contained" onClick={()=>editPost(post.id)} >{<EditIcon />}</Button>
                 <Dialog open={eopen} onClose={editPostClose}>
                     <DialogTitle>Post Details</DialogTitle>
                     <DialogContent>
@@ -178,13 +183,13 @@ function Posts() {
                         <TextField label="crimedate" type="date" placeholder="Enter crime date" value={crimedate} onChange={(e)=>{setCrimedate(e.target.value)}} />
                         <TextField  type="time"  value={crimetime} onChange={(e)=>{setCrimetime(e.target.value)}} />
                         <TextField label="location" placeholder="Enter location" value={location} onChange={(e)=>{setLocation(e.target.value)}} />
-                        <TextField type="file"   />
-                        <Button onClick={updatePost}>Update</Button>
+                        <TextField type="file" onChange={handleImage}  />
+                        <Button disabled={!about + !crimedate + !crimetime + !location} variant="contained" color="primary" onClick={updatePost}>Update</Button>
                         </form>
                         </div>
                     </DialogContent>
                 </Dialog>
-                <Button size="small"  onClick={()=>deletePost(post.id)} variant="contained">Delete</Button>
+                <Button size="small" color="secondary" onClick={()=>deletePost(post.id)} variant="contained">{<DeleteIcon />}</Button>
                 <Dialog open={dopen} onClose={deletePostClose}>
                         {/* <DialogTitle>Food</DialogTitle> */}
                         <DialogContent>
