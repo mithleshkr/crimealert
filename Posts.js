@@ -19,19 +19,21 @@ function Posts() {
     const [crimedate, setCrimedate] = useState("");
     const [crimetime, setCrimetime] = useState("");
     const [location, setLocation] = useState("");
-    const [cimage, setCimage] =useState();
+    const [cimage, setCimage] =useState([]);
     const [userid, setUserid] = useState("");
    
 
     const showDetails = async() => {
+        
         const res= await fetch("http://localhost:3333/post")
         .then((res)=>res.json())
         .then((data)=>setDisplay(data))
         console.warn("res", res);
     }
+    
     useEffect(()=>{
         showDetails();
-    },[])
+    },[]);
     
 
     const [open, setOpen] = React.useState(false);
@@ -105,8 +107,8 @@ function Posts() {
         })
     }
 //   const handleImage =(e)=>{
-//       setCimage({image: e.target.files[0]});
-//   }
+//        setCimage({image: e.target.files[0]});
+//    }
 
     return (
         <div style={{display:"flex",flex:1,height:"100vh"}} >
@@ -146,18 +148,17 @@ function Posts() {
 
             
             <div style={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
-                <card className="card" style={{display:"flex",justifyContent:"space-evenly",flexDirection:"column",height:"40vh"}} >
+                <card className="card" style={{display:"flex",justifyContent:"space-evenly",flexDirection:"column",height:"40vh",overflowY:"auto"}} >
                     <div >
                     <div className="container" style={{display:"flex",justifyContent:"space-evenly",flexDirection:"row"}}>
                 <p>{post.crimedate}</p>
-                
                 <p>{post.crimetime}</p>
                 <p>{post.location}</p>
                 </div>
-                <div>
+                <div style={{display:"flex",justifyContent:"center"}}> 
                     
                     {/* <img style={{height:"20vh",width:500}} src={post.cimage} alt="ghghg"/> */}
-                   <img style={{width:100}} src={post.cimage} alt="ghg" />   
+                   <img style={{width:100}} src={post.cimage} alt="not found" />   
                   
                     
                 </div>
@@ -177,7 +178,7 @@ function Posts() {
                         <TextField label="crimedate" type="date" placeholder="Enter crime date" value={crimedate} onChange={(e)=>{setCrimedate(e.target.value)}} />
                         <TextField  type="time"  value={crimetime} onChange={(e)=>{setCrimetime(e.target.value)}} />
                         <TextField label="location" placeholder="Enter location" value={location} onChange={(e)=>{setLocation(e.target.value)}} />
-                        <TextField type="file" onChange={(e)=>{setCimage(e.target.files)}}  />
+                        <TextField type="file"   />
                         <Button onClick={updatePost}>Update</Button>
                         </form>
                         </div>
