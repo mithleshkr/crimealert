@@ -1,13 +1,16 @@
 import React,{useState, useEffect} from 'react'
 import { Tabs, Tab, Button, Dialog, DialogTitle, DialogContent, TextField } from '@material-ui/core'
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
+// import logo from '../logo.svg';
 
 import './Dashboard.css'
 
 import Postform from './Postform';
+import {useNavigate} from 'react-router-dom';
 
 
 function Posts() {
+    const navigate=useNavigate();
 
    
     const [display, setDisplay] = useState([]);
@@ -16,6 +19,7 @@ function Posts() {
     const [crimedate, setCrimedate] = useState("");
     const [crimetime, setCrimetime] = useState("");
     const [location, setLocation] = useState("");
+    const [cimage, setCimage] =useState();
     const [userid, setUserid] = useState("");
    
 
@@ -77,12 +81,14 @@ function Posts() {
         setCrimedate(item.crimedate)
         setCrimetime(item.crimtime)
         setLocation(item.location)
+        setCimage(item.cimage)
         setUserid(item.id)
        
       };
 
       function updatePost (){
-        let item={about,crimedate, crimetime, location, userid}
+      
+        let item={about,crimedate, crimetime, location,cimage, userid}
         fetch(`http://localhost:3333/post/${userid}`,{
             method: 'PUT',
             headers:{
@@ -98,25 +104,27 @@ function Posts() {
             })
         })
     }
-  
+//   const handleImage =(e)=>{
+//       setCimage({image: e.target.files[0]});
+//   }
 
     return (
         <div style={{display:"flex",flex:1,height:"100vh"}} >
         <div className="sidebar" style={{display:"flex",flex:1, width:"200px",backgroundColor:"whitesmoke",height:"100vh",flexDirection:"column"}}>
             <div className="tab" style={{display:"flex",flex:8,alignItems:"center",justifyContent:"center",flexDirection:"column"}}>
                 <Tabs >
-                    <Tab label="Dashboard" />
+                    <Tab label="Dashboard" onClick={()=>navigate('/dashboard')} />
                 </Tabs>
                 <Tabs value={0} indicatorColor="primary">
                     <Tab label="Post" />
                 </Tabs>
                 <Tabs>
-                    <Tab label="Profile" />
+                    <Tab label="Profile" onClick={()=>navigate('/profile')} />
                 </Tabs>
 
             </div>
             <div style={{display:"flex",justifyContent:"center"}}>
-                <Button variant="contained" color="secondary" >LogOut</Button>
+                <Button variant="contained" color="secondary" onClick={()=>navigate('/')} >LogOut</Button>
             </div>
             
         </div>
@@ -138,23 +146,28 @@ function Posts() {
 
             
             <div style={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
-                <card className="card" style={{display:"flex",justifyContent:"space-evenly",flexDirection:"column",height:"23vh"}} >
+                <card className="card" style={{display:"flex",justifyContent:"space-evenly",flexDirection:"column",height:"40vh"}} >
                     <div >
                     <div className="container" style={{display:"flex",justifyContent:"space-evenly",flexDirection:"row"}}>
                 <p>{post.crimedate}</p>
+                
                 <p>{post.crimetime}</p>
                 <p>{post.location}</p>
                 </div>
                 <div>
-                    photo will upload here
+                    
+                    {/* <img style={{height:"20vh",width:500}} src={post.cimage} alt="ghghg"/> */}
+                   <img style={{width:100}} src={post.cimage} alt="ghg" />   
+                  
+                    
                 </div>
                 <div style={{display:"flex",flexDirection:"row",overflowX:"auto"}}>
                     
                     {post.about}
                 </div>
                 </div>
-                <div>
-                <Button variant="contained" onClick={()=>editPost(post.id)} >edit</Button>
+                <div style={{display:"flex",justifyContent:"space-around"}}>
+                <Button size="small" variant="contained" onClick={()=>editPost(post.id)} >edit</Button>
                 <Dialog open={eopen} onClose={editPostClose}>
                     <DialogTitle>Post Details</DialogTitle>
                     <DialogContent>
@@ -164,12 +177,13 @@ function Posts() {
                         <TextField label="crimedate" type="date" placeholder="Enter crime date" value={crimedate} onChange={(e)=>{setCrimedate(e.target.value)}} />
                         <TextField  type="time"  value={crimetime} onChange={(e)=>{setCrimetime(e.target.value)}} />
                         <TextField label="location" placeholder="Enter location" value={location} onChange={(e)=>{setLocation(e.target.value)}} />
+                        <TextField type="file" onChange={(e)=>{setCimage(e.target.files)}}  />
                         <Button onClick={updatePost}>Update</Button>
                         </form>
                         </div>
                     </DialogContent>
                 </Dialog>
-                <Button onClick={()=>deletePost(post.id)} variant="contained">Delete</Button>
+                <Button size="small"  onClick={()=>deletePost(post.id)} variant="contained">Delete</Button>
                 <Dialog open={dopen} onClose={deletePostClose}>
                         {/* <DialogTitle>Food</DialogTitle> */}
                         <DialogContent>
